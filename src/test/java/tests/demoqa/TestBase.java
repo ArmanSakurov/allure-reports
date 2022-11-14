@@ -12,46 +12,20 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class TestBase {
 
-    @BeforeAll
-    static void configure() {
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
-
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("browserName", "chrome");
-        capabilities.setCapability("browserVersion", "100.0");
-        capabilities.setCapability("enableVNC", true);
-        capabilities.setCapability("enableVideo", true);
-
-        Configuration.browserCapabilities = capabilities;
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browserSize = "1920x1080";
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
-    }
-
-    @AfterEach
-    void addAttachments() {
-        Attach.screenshotAs("Last screenshot");
-        Attach.pageSource();
-        Attach.browserConsoleLogs();
-        Attach.addVideo();
-    }
-
 //    @BeforeAll
 //    static void configure() {
 //        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
 //
 //        DesiredCapabilities capabilities = new DesiredCapabilities();
+//        capabilities.setCapability("browserName", "chrome");
+//        capabilities.setCapability("browserVersion", "100.0");
 //        capabilities.setCapability("enableVNC", true);
 //        capabilities.setCapability("enableVideo", true);
 //
 //        Configuration.browserCapabilities = capabilities;
 //        Configuration.baseUrl = "https://demoqa.com";
-//        Configuration.browser = Property.browser();
-//        Configuration.browserVersion = Property.browserVersion();
-//        Configuration.browserSize = Property.browserSize();
-//        if (!Property.remoteUrl().equals("")) {
-//            Configuration.remote = Property.remoteUrl();
-//        }
+//        Configuration.browserSize = "1920x1080";
+//        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
 //    }
 //
 //    @AfterEach
@@ -61,4 +35,30 @@ public class TestBase {
 //        Attach.browserConsoleLogs();
 //        Attach.addVideo();
 //    }
+
+    @BeforeAll
+    static void configure() {
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("enableVNC", true);
+        capabilities.setCapability("enableVideo", true);
+
+        Configuration.browserCapabilities = capabilities;
+        Configuration.baseUrl = "https://demoqa.com";
+        Configuration.browser = Property.browser();
+        Configuration.browserVersion = Property.browserVersion();
+        Configuration.browserSize = Property.browserSize();
+        if (!Property.remoteUrl().equals("")) {
+            Configuration.remote = Property.remoteUrl();
+        }
+    }
+
+    @AfterEach
+    void addAttachments() {
+        Attach.screenshotAs("Last screenshot");
+        Attach.pageSource();
+        Attach.browserConsoleLogs();
+        Attach.addVideo();
+    }
 }
