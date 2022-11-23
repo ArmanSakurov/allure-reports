@@ -10,7 +10,7 @@ public class PracticeFormTests extends TestBase {
     PracticeFormPage practiceFormPage = new PracticeFormPage();
     @Test
     void fillFormTests() {
-        step("Fill registration form", () -> {
+//        step("Fill registration form", () -> {
             practiceFormPage.openPage("/automation-practice-form")
                     .setFirstName(UserData.name)
                     .setLastName(UserData.lastName)
@@ -23,8 +23,8 @@ public class PracticeFormTests extends TestBase {
                     .setPicture(UserData.picturePath)
                     .setAddress(UserData.currentAddress, UserData.state, UserData.city)
                     .clickSubmit();
-        });
-        step("Check form results", () -> {
+//        });
+//        step("Check form results", () -> {
             practiceFormPage.checkResultsTableVisible()
                     .checkResult("Student Name", UserData.name + " " + UserData.lastName)
                     .checkResult("Student Email", UserData.userEmail)
@@ -36,6 +36,6 @@ public class PracticeFormTests extends TestBase {
                     .checkResult("Picture", "fox.jpg")
                     .checkResult("Address", UserData.currentAddress)
                     .checkResult("State and City", UserData.state + " " + UserData.city);
-        });
+//        });
     }
 }
