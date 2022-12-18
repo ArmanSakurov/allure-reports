@@ -1,16 +1,10 @@
 plugins {
     id 'java'
-    id 'io.qameta.allure' version '2.11.2'
+    id 'io.qameta.allure' version '2.11.0'
 }
 
 repositories {
     mavenCentral()
-}
-
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
-    }
 }
 
 def allureVersion = "2.19.0",
@@ -58,6 +52,7 @@ tasks.withType(JavaCompile) {
 
 
 tasks.withType(Test) {
+    systemProperties(System.getProperties())
     useJUnitPlatform()
 
     testLogging {
@@ -68,4 +63,3 @@ tasks.withType(Test) {
     }
 }
 
-test {}
